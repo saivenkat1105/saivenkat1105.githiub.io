@@ -17,14 +17,14 @@ import ReactMarkdown from "react-markdown";
 import { asset } from "@/lib/assets";
 
 // Defined strict taxonomy for tagging
-const DOMAIN_TAGS = ["Robotics", "Machine Learning", "Control Systems", "Mathematical Modelling", "Mechanical Design", "FEA", "Vibe Coded", "App Development"];
-const TECH_STACK_TAGS = ["Python", "C++", "MATLAB", "Simulink", "ROS2", "Gazebo", "MuJoCo", "Pytorch", "RL", "Fusion 360"];
+const DOMAIN_TAGS = ["Robotics", "ML", "RL", "Control Systems", "Mathematical Modelling", "Mechanical Design", "Vibe Coded"];
+const TECH_STACK_TAGS = ["Python/C++", "MATLAB/Simulink", "ROS2", "Gazebo", "MuJoCo", "Pytorch", "Fusion 360"];
 
 const skillsMap = {
   "Languages": ["Python", "C++"],
   "Software/ Tools": ["MATLAB", "Simulink", "Gazebo", "MuJoCo", "Autodesk Fusion 360"],
-  "Frameworks": ["ROS2 (Humble)", "Nav2", "SLAM Toolbox", "PyTorch", "Scikit-learn"],
-  "Skillset": ["Control Systems", "Machine Learning", "Reinforcement Learning", "Mathematical Modelling", "Robotics Simulation", "State Estimation", "SLAM and Path Planning", "FEA", "Mechanical Design", "3D Printing"]
+  "Frameworks": ["ROS2 (Kilted Kaiju)", "PyTorch", "Scikit-learn", "stable-baselines3", "Gymnasium"],
+  "Skillset": ["Control Systems", "Machine Learning", "Reinforcement Learning", "Mathematical Modelling", "Robotics Simulation", "FEA", "Mechanical Design", "3D Printing"]
 };
 
 const achievements = [
@@ -182,60 +182,82 @@ export default function Home() {
 
   return (
     <div className="flex flex-col pb-24">
-      {/* 1. Unified Intro & About Me */}
-      <section id="about" className="min-h-[calc(100vh-3.5rem)] flex flex-col justify-center relative pt-12 pb-24 scroll-mt-14">
+      {/* 1. Crisp Intro */}
+      <section id="intro" className="min-h-[calc(100vh-3.5rem)] flex flex-col justify-start relative pt-4 pb-24 scroll-mt-14">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(280px,350px)] gap-16 items-center w-full"
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(260px,320px)] gap-16 items-center w-full"
         >
           <div className="space-y-8">
             <div>
-              <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl/tight">
+              <h1 className="text-2xl font-extrabold tracking-tight sm:text-3xl md:text-4xl/tight">
                 Sai Venkat Gunda
               </h1>
-              <h2 className="mt-4 text-2xl font-bold tracking-tight text-primary sm:text-3xl">
-                Advanced Controls & ML Engineer
+              <h2 className="mt-3 text-lg font-bold tracking-tight text-primary sm:text-xl">
+                Advanced Controls & ML Engineer @ JLR
               </h2>
             </div>
 
-            <div className="space-y-6 text-muted-foreground leading-relaxed text-lg pb-8 border-b border-border/50">
+            <div className="space-y-4 text-muted-foreground leading-relaxed text-sm">
               <p>
-                Hey there! Welcome to <span className="text-primary font-semibold">my space</span>. I really want to tell you that this is not your
-                regular portfolio page that you haven't seen already but unfortunately it is. I currently
-                work at <span className="text-primary font-semibold">Jaguar Land Rover</span> on building <span className="text-primary font-semibold">Virtual Sensors</span> and <span className="text-primary font-semibold">Advanced Control Systems</span> to improve vehicle range. My speciality lies in handling the <span className="text-primary font-semibold">entire engineering lifecycle</span> -
-                translating the initial fuzzy ideas
-                to concrete requirements, building the initial MVPs and finally
-                developing a production ready system.
+                Developing <span className="text-primary font-semibold">Advanced Control Algorithms</span>(MPC, EKF) for thermal management systems and <span className="text-primary font-semibold">deployable ML models</span> at
+                <span className="text-primary font-semibold"> Jaguar Land Rover</span> to improve vehicle range and performance.
+                Experienced in handling the entire <span className="text-primary font-semibold">engineering life cycle </span> taking concepts through ideation → simulation → deployment.
+                Always amazed by thinking and moving machines aka <span className="text-primary font-semibold">Robotics.</span>
               </p>
               <p>
-                Looking beyond my standard intro, what I really love is <span className="text-primary font-semibold">solving complex problems </span>
-                and I have always loved machines doing things on their own. So I figured <span className="text-primary font-semibold">robotics</span> is a pretty good field to work on. I worked on some amazing projects like <span className="text-primary font-semibold">building rovers, autonomous wheelchairs,
-                  and pipeline robots</span> in university.
-                Then life took a different turn and I ended up
-                in the automobile industry which was equally exciting, but a small part of me always stayed with robotics.
+
+                Specialized in <span className="text-primary font-semibold">RL, Controls, ML</span> with experience of building robots from scratch both in simulation and real.
+
+                Love <span className="text-primary font-semibold">solving hard problems</span> whatever the field.
+                Excited about <span className="text-primary font-semibold">Physical AI </span> and looking to contribute in this space.
               </p>
-              <p>
-                I am proficient in <span className="text-primary font-semibold">classical and modern control systems, applied ML, and
-                  RL</span>. I also love <span className="text-primary font-semibold">chess, travel, and movies. </span>
-                My current passion project is vibe coding everything that I can think of.
-                The rapidly evolving <span className="text-primary font-semibold">physical AI</span> space is something I am excited about and would
-                like to contribute towards. If you want to talk about robotics, engineering,
-                how to improve my chess Elo, or
-                anything under the sun, hit me up.
+              <p>Addicted to Chess, Badminton, Travel (beaches 🏖️, mountains 🏔️ and everything in between), good food and great sleep. Also books and movies. Sometimes cooking.
+                Always up to learn something new.
               </p>
             </div>
 
-            <div className="flex flex-wrap gap-4">
+            <div className="space-y-3">
+              <p className="text-primary font-semibold text-base">Highlights</p>
+              <ul className="space-y-2.5">
+                {[
+                  { text: "Developed automotive industry's **first energy based thermal management controller** @ JLR" },
+                  { text: "**Patent** - GB2638440A - Target cabin temperature determination for HVAC system of battery electric vehicle" },
+                  { text: "Virtual Sensor & Control Systems @ Jaguar Land Rover" },
+                  { text: "Proficient in Control Systems, Applied ML, and Reinforcement Learning" },
+                  { text: "Currently excited about Physical AI and Embodied Intelligence" },
+                ].map((item, i) => (
+                  <motion.li
+                    key={i}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.3 + i * 0.08, duration: 0.4 }}
+                    className="flex items-start gap-3 text-sm text-muted-foreground"
+                  >
+                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
+                    <ReactMarkdown
+                      components={{
+                        p: ({ children }) => <span>{children}</span>,
+                        strong: ({ children }) => <strong className="text-primary font-semibold">{children}</strong>,
+                      }}
+                    >
+                      {item.text}
+                    </ReactMarkdown>
+                  </motion.li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="flex flex-wrap gap-4 pt-2">
               <a
                 href="resume.pdf"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center justify-center rounded-xl bg-primary px-6 py-4 text-sm font-bold tracking-wide text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:bg-primary/90 hover:scale-105"
               >
-                <FileText className="mr-2 h-4 w-4" /> View Full Resume
+                <FileText className="mr-2 h-4 w-4" /> View Resume
               </a>
               <a
                 href="#contact"
@@ -274,7 +296,7 @@ export default function Home() {
       <section id="skills" className="pt-24 scroll-mt-14">
         <div className="space-y-4 mb-4">
           <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl">Tech Stack</h1>
-          <p className="text-xl md:text-2xl font-bold text-muted-foreground/80">Expertise and toolset.</p>
+          <p className="text-xl md:text-2xl font-bold text-muted-foreground/80">What I am good at</p>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 md:gap-12">
           {/* Column 1: Skillset */}
@@ -487,68 +509,68 @@ export default function Home() {
 
       {/* 5. Achievements */}
       {false && (
-      <section id="achievements" className="pt-24 scroll-mt-14">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="space-y-4 mb-4">
-            <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl">Achievements</h1>
-            <p className="text-xl md:text-2xl font-bold text-muted-foreground/80">What I can brag about ...</p>
-          </div>
+        <section id="achievements" className="pt-24 scroll-mt-14">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="space-y-4 mb-4">
+              <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl">Achievements</h1>
+              <p className="text-xl md:text-2xl font-bold text-muted-foreground/80">What I can brag about ...</p>
+            </div>
 
-          <div className="relative pl-8 md:pl-12 border-l border-border/60 space-y-12 ml-4 md:ml-8">
-            {achievements.map((group, groupIdx) => (
-              <motion.div
-                key={groupIdx}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: groupIdx * 0.1 }}
-                className="relative"
-              >
-                {/* Timeline Dot */}
-                <div className="absolute -left-12 md:-left-[3.25rem] top-1.5 h-6 w-6 rounded-full bg-background border-2 border-primary shadow-[0_0_10px_rgba(var(--primary),0.3)] z-10 flex items-center justify-center">
-                  <div className="h-2 w-2 rounded-full bg-primary" />
-                </div>
+            <div className="relative pl-8 md:pl-12 border-l border-border/60 space-y-12 ml-4 md:ml-8">
+              {achievements.map((group, groupIdx) => (
+                <motion.div
+                  key={groupIdx}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: groupIdx * 0.1 }}
+                  className="relative"
+                >
+                  {/* Timeline Dot */}
+                  <div className="absolute -left-12 md:-left-[3.25rem] top-1.5 h-6 w-6 rounded-full bg-background border-2 border-primary shadow-[0_0_10px_rgba(var(--primary),0.3)] z-10 flex items-center justify-center">
+                    <div className="h-2 w-2 rounded-full bg-primary" />
+                  </div>
 
-                {/* Year Label */}
-                <div className="mb-4">
-                  <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-bold border border-primary/20">
-                    {group.year}
-                  </span>
-                </div>
+                  {/* Year Label */}
+                  <div className="mb-4">
+                    <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-bold border border-primary/20">
+                      {group.year}
+                    </span>
+                  </div>
 
-                {/* Achievement Cards */}
-                <div className="grid gap-4">
-                  {group.items.map((item, itemIdx) => (
-                    <div
-                      key={itemIdx}
-                      className="group bg-card hover:bg-accent/40 p-5 rounded-2xl border border-border/50 shadow-sm transition-all duration-300 hover:shadow-md hover:border-primary/20"
-                    >
-                      <div className="flex gap-4 items-start">
-                        <div className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary/40 group-hover:bg-primary transition-colors shrink-0" />
-                        <span className="text-sm md:text-base leading-relaxed text-muted-foreground group-hover:text-foreground transition-colors">
-                          <ReactMarkdown
-                            components={{
-                              p: ({ children }) => <span>{children}</span>,
-                              strong: ({ children }) => <strong className="text-primary font-extrabold">{children}</strong>,
-                            }}
-                          >
-                            {item}
-                          </ReactMarkdown>
-                        </span>
+                  {/* Achievement Cards */}
+                  <div className="grid gap-4">
+                    {group.items.map((item, itemIdx) => (
+                      <div
+                        key={itemIdx}
+                        className="group bg-card hover:bg-accent/40 p-5 rounded-2xl border border-border/50 shadow-sm transition-all duration-300 hover:shadow-md hover:border-primary/20"
+                      >
+                        <div className="flex gap-4 items-start">
+                          <div className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary/40 group-hover:bg-primary transition-colors shrink-0" />
+                          <span className="text-sm md:text-base leading-relaxed text-muted-foreground group-hover:text-foreground transition-colors">
+                            <ReactMarkdown
+                              components={{
+                                p: ({ children }) => <span>{children}</span>,
+                                strong: ({ children }) => <strong className="text-primary font-extrabold">{children}</strong>,
+                              }}
+                            >
+                              {item}
+                            </ReactMarkdown>
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      </section>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </section>
       )}
 
       {/* 6. Blog */}
@@ -578,7 +600,73 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* 7. Contact Section */}
+      {/* 7. About Me — Detailed */}
+      <section id="about" className="pt-24 scroll-mt-14">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="space-y-4 mb-12">
+            <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl">About Me</h1>
+            <p className="text-xl md:text-2xl font-bold text-muted-foreground/80">The longer version.</p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(280px,340px)] gap-12 items-start">
+            <div className="space-y-6 text-muted-foreground leading-relaxed text-lg">
+              <p>
+                Hey there! Welcome to <span className="text-foreground font-semibold">my space</span>. I really want to tell you that this is not your
+                regular portfolio page that you haven't seen already but unfortunately it is. I currently
+                work at <span className="text-foreground font-semibold">Jaguar Land Rover</span> on building <span className="text-foreground font-semibold">Virtual Sensors</span> and <span className="text-foreground font-semibold">Advanced Control Systems</span> to improve vehicle range. My speciality lies in handling the <span className="text-foreground font-semibold">entire engineering lifecycle</span> —
+                translating the initial fuzzy ideas
+                to concrete requirements, building the initial MVPs and finally
+                developing a production ready system.
+              </p>
+              <p>
+                Looking beyond my standard intro, what I really love is <span className="text-foreground font-semibold">solving complex problems</span> and
+                I have always loved machines doing things on their own. So I figured <span className="text-foreground font-semibold">robotics</span> is a pretty good field to work on. I worked on some amazing projects like <span className="text-foreground font-semibold">building rovers, autonomous wheelchairs,
+                  and pipeline robots</span> in university.
+                Then life took a different turn and I ended up
+                in the automobile industry which was equally exciting, but a small part of me always stayed with robotics.
+              </p>
+              <p>
+                I am proficient in <span className="text-foreground font-semibold">classical and modern control systems, applied ML, and
+                  RL</span>. I also love <span className="text-foreground font-semibold">chess, travel, and movies.</span>{" "}
+                My current passion project is vibe coding everything that I can think of.
+                The rapidly evolving <span className="text-foreground font-semibold">physical AI</span> space is something I am excited about and would
+                like to contribute towards. If you want to talk about robotics, engineering,
+                how to improve my chess Elo, or
+                anything under the sun, hit me up.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-4">
+              <div className="p-6 rounded-[2rem] border border-border bg-card/50 space-y-4">
+                <p className="text-xs font-black uppercase tracking-widest text-muted-foreground/60">Currently</p>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  Controls & ML Engineer @ <span className="text-foreground font-semibold">Jaguar Land Rover</span>
+                </p>
+              </div>
+              <div className="p-6 rounded-[2rem] border border-border bg-card/50 space-y-4">
+                <p className="text-xs font-black uppercase tracking-widest text-muted-foreground/60">Education</p>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  Dual Degree B.Tech + M.Tech, Mechanical Engineering<br />
+                  <span className="text-foreground font-semibold">IIT Madras</span> · GPA 9.14
+                </p>
+              </div>
+              <div className="p-6 rounded-[2rem] border border-border bg-card/50 space-y-4">
+                <p className="text-xs font-black uppercase tracking-widest text-muted-foreground/60">Interests</p>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  Physical AI · Robotics · Chess · Travel · Movies · Vibe Coding
+                </p>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* 8. Contact Section */}
       <section id="contact" className="pt-32 pb-4 scroll-mt-14 mt-12 border-t border-border">
         <div className="flex flex-col items-center justify-center text-center space-y-8 max-w-2xl mx-auto py-16 bg-card rounded-[3rem] border border-border shadow-sm relative overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background to-background pointer-events-none" />

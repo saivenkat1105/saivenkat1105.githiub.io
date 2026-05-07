@@ -24,7 +24,7 @@ export const allProjects: Project[] = [
     type: "engineering",
     shortDescription: "Engineered and deployed **ML models** to virtualize eight thermal sensors with **96% accuracy**. Developed the end-to-end **ML pipeline** from data collection to deployment.",
     longDescription: "Virtual Sensors are models used to mimic the behavior of physical sensors to replace them. In this project, I developed 8 thermal Virtual Sensors that predict variables at different operating conditions. \n\n - Developed an end-to-end **ML pipeline** from data collection from multiple sources (1D simulations, rigs, vehicles etc.), pre-processing, feature engineering, model training, validation, and deployment.  \n - Achieved a **96% accuracy** in predictions across all operating conditions. \n - Reduced the delivery cycle time from **1 week to 4 hours.**  \n - Instrumental in achieving a range increase of **15 - 35 miles.**",
-    tags: ["Machine Learning", "Python", "MATLAB", "Simulink", "Mathematical Modelling"],
+    tags: ["ML", "Python/C++", "MATLAB/Simulink", "Mathematical Modelling"],
     link: "#",
     image: "/projects/Confidential_Image.png",
     images: ["/projects/Confidential_Image.png"]
@@ -36,7 +36,7 @@ export const allProjects: Project[] = [
     type: "engineering",
     shortDescription: "Developing **grey-box state estimation algorithms** and an **MPC architecture** for automobile refrigerant systems.",
     longDescription: "At Jaguar Land Rover, I am currently working on developing **grey-box state estimation algorithms** to replace the heavy dependence on vehicle level tests for data collection. \n\n - Developing the complex **state-space representation** for the refrigerant system. \n - Using **Extended Kalman Filters (EKF)** to estimate the required missing states of the system. \n - The next step is to identify the possibility of implementing **Model Predictive Control (MPC)** to optimize the performance of the system.",
-    tags: ["Control Systems", "MATLAB", "Simulink", "Mathematical Modelling"],
+    tags: ["Control Systems", "MATLAB/Simulink", "Mathematical Modelling"],
 
     image: "/projects/Confidential_Image.png",
 
@@ -48,7 +48,7 @@ export const allProjects: Project[] = [
     type: "engineering",
     shortDescription: "Developed 1D Reduced Order Models for Frontal Crash reducing computation time from **>12 hours to seconds** while preserving an **accuracy of 80%**.",
     longDescription: "Frontal crash simulations are computationally expensive prohibiting design exploration and optimization. A 1D reduced order model was developed to replicate the frontal crash structure behavior during crash events. \n\n - Achieved an **accuracy of 80%** in predictions. \n\n- Reduced the computation time from >12 hours to seconds. \n- Enabled quick design verification of new design ideas. \n - Enabled multi-disciplinary optimization across material and geometry for structural members. ",
-    tags: ["Mechanical Design", "Mathematical Modelling", "FEA", "MATLAB", "Simulink"],
+    tags: ["Mechanical Design", "Mathematical Modelling", "MATLAB/Simulink"],
     link: "#",
     image: "/projects/Confidential_Image.png"
   },
@@ -59,7 +59,7 @@ export const allProjects: Project[] = [
     type: "engineering",
     shortDescription: "Developed an **acoustic-based sensor system** for real-time and accurate localization of pipeline robots with a **±10cm accuracy** across 1 km distance.",
     longDescription: "Pipeline robots are used for failure detection across extremely long pipelines. Since the pipelines could be underground, regular localization or tracking systems do not work. \n\n - Engineered a novel **guided-acoustic-waves-based sensor system** to accurately locate the robot in pipelines.",
-    tags: ["Robotics", "MATLAB", "Python", "FEA"],
+    tags: ["Robotics", "MATLAB/Simulink", "Python/C++", "Mechanical Design"],
     links: [
       { text: "Thesis", url: "/projects/ME17B013_Thesis.pdf" }
     ],
@@ -72,7 +72,7 @@ export const allProjects: Project[] = [
     type: "engineering",
     shortDescription: "Led **Team Anveshak** in building a semi-autonomous **all-terrain Mars rover** complete with a **5 DOF manipulator** and a compliant gripper.",
     longDescription: "Team and Traversal Lead for Team Anveshak, IIT Madras, which builds a **semi-autonomous Mars rover** for extra-terrestrial applications. \n\n - Led the Traversal team in developing a **rocker-bogie suspension system** capable of climbing **45 cm heights and 30 degree inclines**. \n - Developed a **5 DOF manipulator** with a compliant gripper and integrated a **closed-loop control system** using Inverse Kinematics for robust manipulation. \n - Won the Indian Rover Challenge 2019 and placed 12th internationally in the University Rover Challenge 2019.",
-    tags: ["Robotics", "Mechanical Design", "Control Systems", "ROS2", "C++", "Fusion 360", "MATLAB", "Gazebo", "FEA"],
+    tags: ["Robotics", "Mechanical Design", "Control Systems", "ROS2", "Python/C++", "Fusion 360", "MATLAB/Simulink", "Gazebo"],
     links: [{ text: "Blog Post", url: "https://1105saivenkat.wixsite.com/liteonly/post/team-anveshak-the-story-of-me-and-a-mars-rover" }],
     images: ["/projects/Anveshak.avif", "/projects/Caesar.avif"],
 
@@ -84,7 +84,7 @@ export const allProjects: Project[] = [
     type: "engineering",
     shortDescription: "Developed an **assistive wheelchair** for patients with cerebral palsy using **body movement-based control**.",
     longDescription: "In some cases of cerebral palsy, patients do not have precise control over their hand movements in order to use the joysticks present in electric wheelchairs. We have built a **special assisted wheelchair** that translates **gross body movements** to joystick actions enabling mobility. \n\n - Built a **custom sensor array** integrated into off the shelf wheelchairs to capture gross body movements. \n - Used **extensive signal processing techniques** integrating with a **PID based control system** to enable smooth movement and enhanced safety. ",
-    tags: ["Robotics", "Control Systems", "Mechanical Design", "MATLAB", "FEA"],
+    tags: ["Robotics", "Control Systems", "Mechanical Design", "MATLAB/Simulink"],
     links: [{ text: "Report", url: "/projects/ME4001_Project_Report.pdf" }],
     images: ["/projects/wheelchair.jpeg",]
   },
@@ -95,7 +95,7 @@ export const allProjects: Project[] = [
     type: "engineering",
     shortDescription: "Built a special **thermally insulated, crash-proof, light-weight container** to transport organs through drones.",
     longDescription: "Organ delivery is a very critical and time-sensitive process. Organ transportation requires specific thermal conditions and extreme safety during transportation. \n\n - Drone delivery of organs requires a **light-weight, thermally insulated, and crash-proof structure.** \n - We built a special **carbon-fiber container** with custom insulation based on **phase-change materials** for the required structural and thermal properties.",
-    tags: ["Mechanical Design", "FEA"],
+    tags: ["Mechanical Design"],
     video: "/projects/Drone_Video.mp4",
   },
 ];

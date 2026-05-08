@@ -699,7 +699,7 @@ export default function Home() {
               <div className="p-6 rounded-[2rem] border border-border bg-card/50 space-y-4">
                 <p className="text-xs font-black uppercase tracking-widest text-muted-foreground/60">Interests</p>
                 <p className="text-sm leading-relaxed text-muted-foreground">
-                  Physical AI · Robotics · Chess · Travel · Movies · Vibe Coding
+                  Physical AI · Robotics · Chess · Travel · Movies · Badminton · Books
                 </p>
               </div>
             </div>

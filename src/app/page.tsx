@@ -15,7 +15,6 @@ import { allBlogPosts } from "@/data/blog";
 import { CoverflowCarousel } from "@/components/blog/CoverflowCarousel";
 import ReactMarkdown from "react-markdown";
 import { asset } from "@/lib/assets";
-import { useScrollSnap } from "@/hooks/useScrollSnap";
 
 // Defined strict taxonomy for tagging
 const DOMAIN_TAGS = ["RL", "Controls", "ML", "Robotics", "Modelling", "Mechanical Design", "Vibe Coded"];

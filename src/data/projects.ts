@@ -10,6 +10,7 @@ export type Project = {
   tags: string[];
   repo?: string;
   image?: string;
+  coverImage?: string;
   video?: string;
   link?: string;
   links?: { text: string; url: string }[];

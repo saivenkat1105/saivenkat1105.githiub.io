@@ -18,7 +18,7 @@ export function Cartpole() {
     canvas.width = rect.width * dpr;
     canvas.height = rect.height * dpr;
     ctx.scale(dpr, dpr);
-    
+
     const width = rect.width;
     const height = rect.height;
 
@@ -57,7 +57,8 @@ export function Cartpole() {
       radius: number;
       hitTime?: number;
       impulse?: number;
-      startXOffset?: number;
+      startX?: number;
+      startY?: number;
       totalTime?: number;
     };
     let balls: Ball[] = [];
@@ -66,19 +67,23 @@ export function Cartpole() {
       const timeToHit = (targetTime - currentTime) / 1000;
       if (timeToHit <= 0) return;
       
-      // If impulse > 0 (push pole right), ball must come from the LEFT (negative offset)
-      const startOffset = impulse > 0 ? -250 : 250; 
+      const hitX = width / 2 + x * (width / 4.8) + Math.sin(theta) * 60; // Aim near pole tip
+      const hitY = height - 70;
+      
+      // If impulse > 0 (push pole right), ball must come from the LEFT
+      const startX = impulse > 0 ? hitX - 250 : hitX + 250; 
       
       balls.push({
         x: 0, // dynamically calculated in update loop
-        y: height - 70,
+        y: 0,
         vx: 0,
         vy: 0,
         state: 'incoming',
         radius: 4.5,
         hitTime: targetTime,
         impulse: impulse,
-        startXOffset: startOffset,
+        startX: startX,
+        startY: hitY,
         totalTime: timeToHit
       });
     };
@@ -132,11 +137,17 @@ export function Cartpole() {
         ctx.arc(b.x, b.y, b.radius, 0, 2 * Math.PI);
         if (b.state === 'incoming') {
           ctx.fillStyle = "hsl(var(--destructive))";
-          
-          // Motion trail (pointing opposite to travel)
-          const trailDir = b.startXOffset! > 0 ? 1 : -1;
+
+          // Motion trail (pointing backwards to start)
+          const dx = b.startX! - b.x;
+          const dy = b.startY! - b.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const trailLen = 15;
+          const trailX = dist > 0 ? b.x + (dx / dist) * trailLen : b.x;
+          const trailY = dist > 0 ? b.y + (dy / dist) * trailLen : b.y;
+
           ctx.beginPath();
-          ctx.moveTo(b.x + trailDir * 15, b.y);
+          ctx.moveTo(trailX, trailY);
           ctx.lineTo(b.x, b.y);
           ctx.strokeStyle = "hsl(var(--destructive) / 0.5)";
           ctx.lineWidth = b.radius * 2;
@@ -144,7 +155,7 @@ export function Cartpole() {
         } else {
           ctx.fillStyle = "hsl(var(--muted-foreground))";
         }
-        
+
         ctx.beginPath();
         ctx.arc(b.x, b.y, b.radius, 0, 2 * Math.PI);
         ctx.fill();
@@ -170,7 +181,7 @@ export function Cartpole() {
         spawnIncomingBall(nextJerkTime, time, impulse);
         ballSpawnedForJerk = true;
       }
-      
+
       // Schedule next event
       if (time >= nextJerkTime) {
         nextJerkTime = time + 8000;
@@ -204,24 +215,25 @@ export function Cartpole() {
           } else {
             // Homing interpolation guarantees it tracks the pole exactly
             const currentHitX = cartPixelX + Math.sin(theta) * 60;
+            const currentHitY = cartY - Math.cos(theta) * 60;
             const p = Math.max(0, timeRemaining / b.totalTime!);
-            b.x = currentHitX + b.startXOffset! * p;
-            b.y = height - 70;
+            b.x = currentHitX + (b.startX! - currentHitX) * p;
+            b.y = currentHitY + (b.startY! - currentHitY) * p;
           }
         } else if (b.state === 'falling') {
           b.vy += 400 * frame_dt; // Gravity (lowered for floaty debris)
           b.x += b.vx * frame_dt;
           b.y += b.vy * frame_dt;
-          
+
           // Cart Collision (AABB with minimum penetration resolution)
           if (b.x + b.radius > cartLeft && b.x - b.radius < cartRight &&
-              b.y + b.radius > cartTop && b.y - b.radius < cartBottom) {
-              
+            b.y + b.radius > cartTop && b.y - b.radius < cartBottom) {
+
             const distLeft = Math.abs((b.x + b.radius) - cartLeft);
             const distRight = Math.abs((b.x - b.radius) - cartRight);
             const distTop = Math.abs((b.y + b.radius) - cartTop);
             const minPenetration = Math.min(distLeft, distRight, distTop);
-            
+
             if (minPenetration === distTop) {
               b.y = cartTop - b.radius;
               b.vy = b.vy > 0 ? -b.vy * 0.4 : b.vy;
@@ -234,7 +246,7 @@ export function Cartpole() {
               b.vx = cartPixelVx > 0 ? cartPixelVx * 1.1 : 40;
             }
           }
-          
+
           // Floor Collision (only if resting on the track)
           if (b.x > 0 && b.x < width) {
             if (b.y > floorY - b.radius) {
@@ -245,7 +257,7 @@ export function Cartpole() {
           }
         }
       });
-      
+
       // Cleanup balls out of bounds
       balls = balls.filter(b => b.y < height + 100);
 
@@ -260,9 +272,9 @@ export function Cartpole() {
 
         const costheta = Math.cos(theta);
         const sintheta = Math.sin(theta);
-        
+
         const temp = (force + polemass_length * theta_dot * theta_dot * sintheta) / total_mass;
-        const thetaacc = (gravity * sintheta - costheta * temp) / (length * (4.0/3.0 - masspole * costheta * costheta / total_mass));
+        const thetaacc = (gravity * sintheta - costheta * temp) / (length * (4.0 / 3.0 - masspole * costheta * costheta / total_mass));
         const xacc = temp - polemass_length * thetaacc * costheta / total_mass;
 
         x += x_dot * dt;
@@ -298,23 +310,23 @@ export function Cartpole() {
       const clickY = e.clientY - rect.top;
       const cartPixelX = width / 2 + x * (width / 4.8);
       
-      // Kick the pole depending on where we clicked relative to the cart
-      let kick = 0;
-      if (clickX < cartPixelX) {
-        kick = 3.0; // Fall right
-      } else {
-        kick = -3.0; // Fall left
-      }
-      theta_dot += kick;
+      // Determine kick direction based on click
+      let kick = clickX < cartPixelX ? 3.0 : -3.0;
 
-      // Spawn a debris ball right where they clicked!
+      // Spawn an incoming ball from the cursor to the pole
+      const timeToHit = 0.2; // 200ms flight time
       balls.push({
         x: clickX,
         y: clickY,
-        vx: kick > 0 ? 50 : -50, // Bounce away slightly
-        vy: -50, // Pop up slightly
-        state: 'falling',
-        radius: 4.5
+        vx: 0,
+        vy: 0,
+        state: 'incoming',
+        radius: 4.5,
+        hitTime: lastTime + timeToHit * 1000,
+        impulse: kick,
+        startX: clickX,
+        startY: clickY,
+        totalTime: timeToHit
       });
     };
 
@@ -328,17 +340,17 @@ export function Cartpole() {
   }, []);
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       className="mt-auto pt-8 pb-4 w-full flex flex-col items-center"
     >
       <div className="w-full flex items-center justify-between px-2 mb-2">
-        <span className="text-xs font-bold text-muted-foreground/60 uppercase tracking-widest">LQR Controller</span>
+        <span className="text-xs font-bold text-muted-foreground/60 uppercase tracking-widest">LQR</span>
         <span className="text-[10px] text-muted-foreground/40 bg-muted px-1.5 py-0.5 rounded">Interactive</span>
       </div>
-      <canvas 
-        ref={canvasRef} 
+      <canvas
+        ref={canvasRef}
         className="w-full h-[120px] rounded-xl bg-card border border-border/50 cursor-crosshair shadow-sm"
         style={{ touchAction: "none" }}
       />
